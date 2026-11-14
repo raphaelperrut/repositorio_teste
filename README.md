@@ -719,6 +719,10 @@ Potential future versions may explore:
 
 These features are intentionally outside the `v0.1.0` scope.
 
+## Execucao via vmpipe
+
+As tarefas sao implementadas, testadas e revisadas automaticamente.
+
 ## License
 
 This project is licensed under the MIT License.
