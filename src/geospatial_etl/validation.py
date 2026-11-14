@@ -1,5 +1,7 @@
 """Validation utilities for geospatial datasets."""
 
+import re
+
 from geospatial_etl.models import (
     DatasetInspection,
     DatasetValidation,
@@ -78,3 +80,30 @@ def validate_dataset(
         is_valid=not issues,
         issues=tuple(issues),
     )
+
+
+def validate_cep(cep: str) -> bool:
+    """Check whether a value is a valid Brazilian CEP.
+
+    Parameters
+    ----------
+    cep
+        CEP value, either in the ``NNNNN-NNN`` or ``NNNNNNNN`` format.
+        Leading and trailing whitespace is ignored.
+
+    Returns
+    -------
+    bool
+        ``True`` if the value is a well-formed, non-zero Brazilian CEP,
+        ``False`` otherwise.
+    """
+
+    if not isinstance(cep, str):
+        return False
+
+    normalized = cep.strip()
+
+    if re.fullmatch(r"[0-9]{5}-?[0-9]{3}", normalized) is None:
+        return False
+
+    return normalized.replace("-", "") != "00000000"
