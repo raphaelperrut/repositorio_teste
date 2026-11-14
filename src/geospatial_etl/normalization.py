@@ -1,8 +1,33 @@
 """Normalization utilities for geospatial datasets."""
 
 import re
+import unicodedata
 
 import geopandas as gpd
+
+
+def slugify(texto: str) -> str:
+    """Convert text into a lowercase, accent-free, hyphen-separated slug.
+
+    Parameters
+    ----------
+    texto
+        Text to convert.
+
+    Returns
+    -------
+    str
+        Slug containing only lowercase ASCII letters, digits and single
+        hyphens between words. Leading and trailing hyphens are removed.
+    """
+
+    decomposed = unicodedata.normalize("NFKD", texto)
+
+    ascii_text = decomposed.encode("ascii", "ignore").decode("ascii")
+
+    slug = re.sub(r"[^a-z0-9]+", "-", ascii_text.lower())
+
+    return slug.strip("-")
 
 
 def normalize_dataset(
