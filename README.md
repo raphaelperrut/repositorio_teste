@@ -10,6 +10,8 @@ A reproducible Python ETL pipeline for ingesting, inspecting, validating, normal
 
 Version `0.1.0` is release-ready.
 
+The project uses Python 3.12.
+
 The pipeline is validated end-to-end against PostgreSQL/PostGIS, including:
 
 - vector dataset ingestion;
