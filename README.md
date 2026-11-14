@@ -723,6 +723,22 @@ These features are intentionally outside the `v0.1.0` scope.
 
 As tarefas sao implementadas, testadas e revisadas automaticamente.
 
+## Como rodar os testes
+
+Instale as dependencias de desenvolvimento:
+
+```bash
+pip install -e ".[dev]"
+```
+
+Execute a suite de testes do projeto:
+
+```bash
+pytest -v
+```
+
+Esse comando usa a configuracao de `pyproject.toml`, que define `tests` como diretorio de testes e `src` no `pythonpath`.
+
 ## License
 
 This project is licensed under the MIT License.
