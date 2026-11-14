@@ -127,3 +127,27 @@ def test_validate_cep_accepts_valid_ceps(cep: str) -> None:
     """Accept well-formed CEPs with or without hyphen and extra whitespace."""
 
     assert validate_cep(cep) is True
+
+
+@pytest.mark.parametrize(
+    "cep",
+    [
+        "",
+        "   ",
+        None,
+        12345678,
+        "0100100",
+        "010010000",
+        "0100a000",
+        "01001-00",
+        "010-01000",
+        "01001-00-0",
+        "00000000",
+        "00000-000",
+        " 00000-000 ",
+    ],
+)
+def test_validate_cep_rejects_invalid_ceps(cep: object) -> None:
+    """Reject empty, non-string, malformed and all-zero CEP values."""
+
+    assert validate_cep(cep) is False  # type: ignore[arg-type]
